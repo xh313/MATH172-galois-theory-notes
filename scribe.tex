@@ -531,4 +531,43 @@ Suppose $p(x)\in F[x]$ is an irreducible polynomial with coefficients in the fie
         in $(\Z/p\Z)[x]\cong \Z[x]/p\Z[x]$ since all other terms are divisible by $p$. Since $\Z/p\Z$ does not contain any zero divisors, $\bar a(x), \bar b(x)$ must have zero constant terms. Hence $a(x),b(x)$ have constant terms that are multiples of $p$, so $a(x)b(x)$ have constant term divisible by $p^2$. This is a contradiction with $p^2\nmid a_0$.
     \end{proof}
 
+    \begin{lemma}[Gauss' Lemma]
+        \addlink{Gauss' Lemma}
+        If $p(x)\in \Z[x]$ is reducible in $\Q[x]$, then it is reducible in $\Z[x]$.
+    \end{lemma}
+    \begin{proof}
+        Suppose $p(x)=a(x)b(x)$ for $a(x),b(x)\in \Q[x]$. Then by multiplying by coefficient denominators, for some $m\in \Z$, we could write $m\cdot p(x)= c(x)d(x)$ for some $c(x),d(x)\in \Z[x]$. Now since $m\in \Z$, we could write $m=q_1q_2\dots q_n$ be a product of irreducibles in $\Z$.
+        
+        Now in $(\Z/q_1\Z)[x]\cong \Z[x]/(q_1\Z)[x]$, we observe that $m\cdot p(x)= c(x)d(x)=q_1(q_2\dots q_n)p(x)$, meaning that \begin{align*}
+            \overline{c(x)}\,\overline{d(x)}=\overline{q_1(q_2\dots q_n)p(x)}=\overline 0
+        \end{align*}
+        Since $(\Z/q_1\Z)[x]\cong \Z[x]/(q_1\Z)[x]$ is an \uline{integral domain}\sidenote{since $q_1$ is irreducible and hence prime in UFD}, WLOG, $\overline{c(x)}=\overline 0$ \ifnif $c(x)\in q_1\Z[x]$, meaning that all coefficients of $c(x)$ are multiples or $q_1$. Therefore, $\dfrac{1}{q_1}c(x)\in \Z[x]$.
+
+        Now we repeat the process for all $q_1,q_2,\dots ,q_n$ and we are done.
+    \end{proof}
+
+    Recall that if $F\subseteq K$ are fields, $\alpha\in K$ and $p(x)\in F[x]$ is irreducible with root $\alpha$, then $$F[\alpha]=F(\alpha)\cong F[x]/(p(x))=\{\overline{a_0+a_1x+\dots+a_{n-1}x^{n-1}}\mid a_0,a_1\dots,a_{n-1}\in F\}$$
+
+    We observe that this has a few implications. For instance, $F(\alpha)$ contains $\frac{1}{\alpha}$\sidenote{since it is a field containing the mult. inverse of $\alpha$}, meaning that it could also be written as a polynomial of $\alpha$ with coefficients in $F$ (as in $F[\alpha]$)!
+
+    \defn Suppose $K/F$ is a field extension and $\alpha\in K$. We say that $\alpha$ is \textbf{algebraic over $F$} if there exists $p(x)\in F[x]$ such that $p(\alpha)=0$. If not, $\alpha$ is \textbf{transcendental}.
+    \addlink{Algebraic and transcendental}
+
+    \defn The extension $K/F$ is an \textbf{algebraic extension} if \textbf{every} element $\alpha\in K$ is algebraic over $F$.
+    \addlink{Algebraic extension}
+
+    \eg $\pi$ is transcendental over $\Q$ but algebraic over $\R$ (since it is a root of $x-\pi$).
+
+    \begin{proposition}
+        If $K/F$ is a \textbf{finite extension} \sidenote{finite extension just means finite degree $[K:F]<\infty$}, then it is an algebraic extension.
+    \end{proposition}
+    \addlink{Finite extensions are algebraic}
+    \begin{proof}
+        Call $[K:F]=n$ and let $\alpha\in K$. Then the $n+1$ elements $\{1,\alpha,\alpha^2,\dots, \alpha^n\}$ must be \uline{linearly dependent}\sidenote{since $n+1>\dim(K/F)=n$}. Hence, by linear algebra, there exist $a_0,a_1,\dots,a_n\in F$ not all zero such that the linear combination $a_0+a_1\alpha+a_2\alpha^2+\dots +a_n\alpha^n=0$. Hence, $\alpha$ is a root of $a_0+a_1x+a_2x^2+\dots +a_nx^n=0$.
+    \end{proof}
+
+    \begin{corollary}
+        If $K/F$ is an extension and $\alpha\in K$, then $\alpha$ is algebraic over $F$ \ifnif $[F(\alpha):F]<\infty$.
+    \end{corollary}
+
 \end{document}
