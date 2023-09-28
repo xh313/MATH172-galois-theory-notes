@@ -447,7 +447,7 @@ So, what the hell is $F[x]/(p(x))$? We have already shown that the field extensi
 
 Suppose $p(x)\in F[x]$ is irreducible. Let $K/F$ be an extension, and $\alpha\in K$ a root of $p(x)$. Denote by $F(\alpha)\subseteq K$ the \textbf{smallest} subfield of $K$ that contains both $F$ and $\alpha$. Consider the map $\varphi : F[x]\to F(\alpha)\subseteq K$ where $q(x)\mapsto q(\alpha)$ is simply the evaluation at $\alpha$ map. We note that $p(x)\in \ker(\varphi) = (d(x))$ since an ED is a PID; this implies that $p(x)=u(x)d(x)$. As $p(x)$ is irreducible, $u(x)$ must be a unit, which means $p(x)$ and $d(x)$ are associates and $\ker(\varphi)=(p(x))$. Therefore, $$F[x]/(p(x))= F[x]/\ker(\varphi)\cong \homo{F[x]}\subseteq F(\alpha)$$ by first isomorphism theorem\sidenote{Observe that $\homo{F[x]}$ is a field: $\ker(\varphi)$ is a maximal ideal}. However, $F(\alpha)\subseteq K$ the \textbf{smallest} subfield of $K$ that contains both $F$ and $\alpha$, so $\homo{F[x]}$ cannot be smaller than that. Hence, it must be true that $\homo{F[x]}=F(\alpha)$.
 
-Therefore, \uline{$F(\alpha)$ is simply $F[x]/(p(x))$.}
+Therefore, \uline{$F(\alpha)$ is simply $F[x]/(p(x))$.} \qed
 
 \subsubsection{To summarize so far!}
 Suppose $p(x)\in F[x]$ is an irreducible polynomial with coefficients in the field $F$.
@@ -569,5 +569,27 @@ Suppose $p(x)\in F[x]$ is an irreducible polynomial with coefficients in the fie
     \begin{corollary}
         If $K/F$ is an extension and $\alpha\in K$, then $\alpha$ is algebraic over $F$ \ifnif $[F(\alpha):F]<\infty$.
     \end{corollary}
+    \begin{proof}\hfill
+        \begin{enumerate}[align=left]
+            \item[($\impliedby$)] Follows from prop.
+            \item[($\implies$)] If $\alpha$ is algebraic, then there exists an irreducible polynomial $p(x)$ with $\alpha$ as a root and of degree $n<\infty$. Then $F(\alpha)\cong F[x]/(p(x))$ is a $n$-dimensional vector space over $F$.
+            
+            Another perspective: $F(\alpha)=\mathrm{Span}_F\{1,\alpha,\alpha^2,\dots ,\alpha^{n-1}\}$.\sidenote{Review proof of $F(\alpha)\cong F[x]/(p(x))$.}
+        \end{enumerate}
+    \end{proof}
 
+    \begin{proposition}
+        Suppose $K/F$ is an extension \& $\alpha\in K$ is algebraic over $F$. Then there exists a \uline{unique, irreducible, and monic} polynomial $m_{\alpha,F}(x)\in F[x]$ that has $\alpha$ as a root.
+    \end{proposition}
+    \rmk We observe that $m$ does depend on the base field $F$; $m_{\sqrt{2},\Q}(x)=x^2-2$, but $m_{\sqrt{2},\Q(\sqrt{2})}(x)=x^2-\sqrt{2}$.
+    \begin{proof}
+        Since the subset of $F[x]$ \textit{satisfying $\alpha$ is a root} is nonempty, we can pick one with a \textbf{minimal degree}. By multiplying by an element of $F$ if necessary, we can assume WLOG this polynomial is \textbf{monic}. Call it $m_{\alpha,F}(x)$. 
+        
+        Assume BWOC that $m$ is the product of two other polynomials of lesser degree such that $m_{\alpha,F}(x)=a(x)b(x)$, then we plug in $0=m_{\alpha,F}(\alpha)=a(\alpha)b(\alpha)$. Since there are no zero divisors in $F[x]$, WLOG $a(\alpha)=0$, contradicting the minimality of $m_{\alpha,F}$. Hence $m_{\alpha,F}$ is \textbf{irreducible}.\sidenote{So $F(\alpha)\cong F[x]/(m_{\alpha,F}(x))$}
+
+        Then, BWOC if $p(x)\in F[x]$ with $\alpha$ as a root and is monic and irreducible, there exist $q(x),r(x)\in F[x]$ such that $p(x)=m_{\alpha,F}(x)q(x)+r(x)$ where $\deg(r)< \deg(m_{\alpha,F})$ or $r(x)=0$. Then, we observe that $p(\alpha)=0=m_{\alpha,F}(\alpha)q(m_{\alpha,F})+r(\alpha)=0+r(\alpha)$. Thus, $r(\alpha)=0$, so $\deg(r)\geq \deg(m_{\alpha,F})$ unless $r(x)=0$ by minimality. Hence we must have $r(x)=0$, so $m_{\alpha,F}|p$. This contradicts the assumption that $p$ is monic and irreducible.
+        Therefore, $m_{\alpha,F}$ is the \textbf{only} minimal, monic and irreducible polynomial where $\alpha$ is a root.
+    \end{proof}
+
+    \defn $m_{\alpha, F}(x)$ is the \textbf{minimal} polynomial of $\alpha$ over $F$.
 \end{document}
