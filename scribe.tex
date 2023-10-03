@@ -1,7 +1,6 @@
 \documentclass[12pt]{article}
 \input{customcommands}
 
-
 %=============
 
 \begin{document}
@@ -140,7 +139,9 @@ Why do we want ideals? Such that $R/I$ is a well-defined ring.
 \begin{proposition}
     Every proper ideal is contained in \textbf{a} maximal ideal.\sidenote{This might not be unique in non-local rings.}
 \end{proposition}
-\proof TBD. \qed
+\begin{proof}
+    Axiom of choice.
+\end{proof}
 
 \begin{proposition}\label[prop]{mod-zero-ideal}
     Suppose $R$ is a commutative ring.\begin{itemize}
@@ -593,4 +594,48 @@ Suppose $p(x)\in F[x]$ is an irreducible polynomial with coefficients in the fie
     \end{proof}
 
     \defn $m_{\alpha, F}(x)$ is the \textbf{minimal} polynomial of $\alpha$ over $F$.
+
+    \ontangent{
+        
+    Some exam prep!
+    \begin{itemize}
+        \item In general, for subrings $R\subseteq S$, we have if $r\in R^{\times}$, then $r\in S^{\times}$.
+        \item If we adjoint one root of an irreducible polynomial to a field, the fields are isomorphic no matter which root of that polynomial we adjoint.
+    \end{itemize}}
+
+To summarize, if $K/F$ is a field extension and $\alpha\in K$, then $\alpha$ is \textbf{algebraic} over $F$ if it is the root of some polynomials in $F[x]$. For each algebraic $\alpha$, there exists a unique, monic, irreducible polynomial $m_{\alpha,F}(x)\in F[x]$ such that $m(\alpha)=0$. In that case, the degree of extension $[F(\alpha):F]=\deg(m_{\alpha,F}(x))$; and, if $p(\alpha)=0$ for some $p(x)\in F[x]$, then $m_{\alpha,F}\vert p(x)$. In general, if $[K:F]<\infty$, then $K/F$ is algebraic. Thus, $[F(\alpha):F]<\infty$ \ifnif $\alpha$ is algebraic over $F$.
+\begin{proposition} 
+    If $F\subseteq K\subseteq L$ are fields, then \sidenote{\begin{tikzcd}[ampersand replacement=\&,cramped,sep=small]
+        L \\
+        K \\
+        F
+        \arrow["n", no head, from=1-1, to=2-1]
+        \arrow["m", no head, from=2-1, to=3-1]
+        \arrow["mn"', no head, bend right = 30, from=1-1, to=3-1]
+    \end{tikzcd}}\begin{align*}
+        [L:F]=[L:K]\cdot[K:F]
+    \end{align*}
+    \addlink{Degree of extension is multiplicative}
+\end{proposition}
+
+\begin{proof}
+    We first see that if $[K:F]=\infty$, then for any $N\in \N$, there exists $\alpha_1,\dots,\alpha_N\in K$ that are linearly independent over $F$. In that case, it is certainly true that $\alpha_1,\dots,\alpha_N\in L$ are linearly independent over $F$. Thus, $[L:F]=\infty$. \sidenote{Linear independence implies that whenever $a_1\alpha_1+a_2\alpha_2+\dots+a_N\alpha_N=0$ for some coefficients $a_1,\dots,a_N\in F$, then necessarily $a_1=a_2=\dots=a_N=0$.}
+
+    If $[L:K]=\infty$, then for any $N\in \N$, there exists $\beta_1,\dots,\beta_N\in L$ that are linearly independent over $K$. As a result, it also is linearly independent over $F$. Hence, $[L:F]=\infty$.
+
+    If $[K:F]=m$ and $[L:K]=n$, let $\alpha_1,\dots,\alpha_m\in K$ be a basis for $K$ over $F$ and $\beta_1,\dots,\beta_n\in L$ be a basis for $L$ over $K$. \rt{Claim:} $\{\alpha_i\beta_j\mid 1\leq i\leq m, 1\leq j\leq n\}$ forms a basis for $L$ over $F$.
+
+    \tbd{Try proving this or see D\&F}
+\end{proof}
+
+Some nice consequences:
+\begin{corollary}
+    Suppose $K/F$ is an extension and $\alpha,\beta\in K$ are algebraic over $F$. Then:
+    \begin{itemize}
+        \item $F(\alpha,\beta)=(F(\alpha)(\beta))$\sidenote{the smallest subfield of $K$ containing $F, \alpha,\beta$}
+        \item $[F(\alpha,\beta):F]=[F(\alpha,\beta):F(\beta)][F(\beta):F]=\deg\left(m_{\alpha,F(\beta)}(x)\right)\cdot \deg\left(m_{\beta,F(x)}\right)$. However, note that the minimal polynomial $$m_{\alpha,F(\beta)}(x)\mid m_{\alpha,F}(x)\in F(\beta)[x]$$
+        so $\deg(m_{\alpha,F(\beta)}(x))\leq \deg(m_{\alpha,F}(x))$. Hence, $$[F(\alpha,\beta):F]\leq \deg(m_{\alpha,F}(x))\deg(m_{\beta,F})<\infty$$
+    \end{itemize}
+\end{corollary}
+%%%%%%%%%%%%%%%%%%%%%%%%%    
 \end{document}
