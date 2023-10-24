@@ -808,7 +808,7 @@ If $f(x)$ is not constant and $f'(x)=0$, then $\mathrm{char} (F)=p>0$ and $f(x)=
 \begin{proof}
     For the case of char=0, it follows from \ref{irred-non-sep}.
 
-    For the case of char>0, suppose $F$ is a finite field of $p^n$ elements. Then the map $F\to F$ where $\alpha\mapsto \alpha^p$ is a \dashuline{field isomorphism}.\sidenote{Use binomial theorem.} Hence, every element of $F$ is a $p^{th}$ power.
+    For the case of char>0, suppose $F$ is a finite field of $p^n$ elements\footnote{See \cref{sec:prime-fields}}. \sidenote{Use binomial theorem.}Then the map $F\to F$ where $\alpha\mapsto \alpha^p$ is a \dashuline{field isomorphism}. Hence, \dashuline{every element of $F$ is a $p^{th}$ power.}\sidenote{Such fields are called \textbf{perfect}.}
 
     Now suppose BWOC $f(x)=\sum_{i=0}^{n}a_ix^i\in F[x]$ is an irreducible but not separable polynomial. Therefore, $f'(x)=0$ must be true. This happens \ifnif $f(x)=\sum_{j=0}^{m}a_{jp}x^{jp}$, that is, the $x$ in all terms are of $p^{th}$ degree. However, we know that all elements $a_{jp}\in F$ are already the $p^{th}$ powers of sth else $(b_{jp})^p=a_{jp}$, so $$f(x)=\sum_{j=0}^{m}(b_{jp}^p)x^{jp}$$ and by reverse Binomial Theorem, we get $$f(x)=\sum_{j=0}^{m}(b_{jp}^p)x^{jp}=\left(\sum_{j=0}^{m}b_{jp}x^j\right)^p$$ is not irreducible!
 \end{proof}
@@ -817,6 +817,52 @@ If $f(x)$ is not constant and $f'(x)=0$, then $\mathrm{char} (F)=p>0$ and $f(x)=
 Then $p(x)=x^p-t$ is not separable (but it is irreducible). \sidenote{The coefficients of $p(x)$ are meromorphics in $\F_p(t)$.}
 This can be seen if we suppose $\alpha$ is a root of $p(x)$ (so $\alpha=t$). Then, in $F(\alpha)[x]$, we have $p(x)=x^p-t=x^p-\alpha^p=(x-\alpha)^p$, which tells us $p(x)$ is not separable.}
 
+\ontangent{
+    \subsubsection{Prime fields}\label[section]{sec:prime-fields} Suppose $R$ is a commutative ring with identity. The map $\Z\to R$ where $n\mapsto \pm(\underset{|n| \text{ times}}{\underbrace{1_R+1_R+\dots +1_R}})$ ($-$ if $n<0$) is a \uline{ring homomorphism}\sidenote{check it!} with kernel $n\Z$ where $n=\mathrm{char}(R)$. So:\begin{itemize}
+        \item if char $(R)=0$, then $R$ contains $\Z$;
+        \item if char $(R)=n>0$, then $R$ contains $\znz{\textit{n}}$.
+    \end{itemize}
+    If $F$ is a field, then:\begin{itemize}
+        \item if char $(F)=0$, then $F$ conatins $\Q$;
+        \item if char $(F)=p>0$, then $p$ prime and $F$ contains $\znz{\textit{p}}$.\sidenote{That is, $F$ is an extension of $\znz{\textit{p}}$!}
+    \end{itemize}
+    \addlink{Every field is an extension of $\Q$ or $\F_p$}
+    In other words, \dashuline{every field is an extension of $\Q$ or $\F_p$.} Moreover, a finite field is a \textit{finite} extension of $\F_p$: if $[F:\F_p]=n$, then $|F|=p^n$.
+
+    In addition, $|F-\{0\}|=p^n-1\implies $ if $\alpha\in F-\{0\}$ then $\alpha^{p^n-1}=1$\sidenote{By Lagrange's Theorem}, implying that if $\alpha\in F$, then $\alpha^{p^n}=\alpha$, meaning that $\alpha$ is a root of $x^{p^n}-x\in F[x]$. Therefore, $F$ is the \dashuline{splitting field} of $x^{p^n}-x$. But splitting fields are unique, so we conclude that there is only one unique finite field for each order.
+    \addlink{Finite fields are unique}
+
+}
+
+\addlink{Separable extensions}
+\defn An algebraic extension $K/F$ is called (algebraically) \textbf{separable} if $m_{\alpha,F}(x)$ is separable for \textbf{all} $\alpha\in K$.
+
+\addlink{Galois extensions}
+\defn A finite extension $K/F$ is called \textbf{Galois} if $K/F$ is \uline{normal}\sidenote{normal just means it is a splitting field of something} and \uline{separable}.
+
+\section{Galois Theory}
+\defn If $K/F$ is an extension, then the \textbf{automorphism group} of $K/F$ is defined as \begin{align*}
+    \Aut(K/F) &= \left\{ \sigma\in \Aut(K) \mid \sigma(a)=a\, \forall \, a\in F\right\}
+\end{align*}\addlink{Automorphism group of field extensions}
+That is, all the automorphisms of $K$ that also fix the field $F$.
+
+\begin{theorem}[The Fundamental Theorem of Galois Theory]
+    \addlink{Fundamental Theorem of Galois Theory}\hfill
+
+    If $K/F$ is Galois, then
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped,column sep=large,row sep=2.25em]
+        K \&\&\& 1 \\
+        E \&\&\& H \\
+        F \&\&\& {\mathrm{Aut}(K/F)}
+        \arrow["{\{\alpha\in K\, \mid\, \sigma(\alpha)=\alpha\; \forall\; \sigma\in H\}}"', shift right=2, from=2-4, to=2-1]
+        \arrow["{\mathrm{Aut}(K/E)}"', shift right=2, from=2-1, to=2-4]
+        \arrow[no head, from=1-1, to=2-1]
+        \arrow[no head, from=2-1, to=3-1]
+        \arrow[no head, from=1-4, to=2-4]
+        \arrow[no head, from=2-4, to=3-4]
+    \end{tikzcd}\]
+    where $H$ is a subgroup of $\Aut(K/F)$ that fixes the field $E$, an extension of $F$ contained in $K$.
+\end{theorem}
 
  %%%%%%%%%%%%%%%%%%%%%%%%%    
 \end{document} 
