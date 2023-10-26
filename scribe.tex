@@ -698,6 +698,7 @@ Some nice consequences:
 \rmk If $E$ is the splitting field of $p(x)$ over $F$ then $[E:F]\leq n!$ where $n=\deg(p(x))$.
 
 \rmk Such an extension is called \textbf{normal}.
+\addlink{Normal extensions}
 
 \begin{proposition}
     \addlink{Splitting fields exist}
@@ -841,7 +842,7 @@ This can be seen if we suppose $\alpha$ is a root of $p(x)$ (so $\alpha=t$). The
 \defn A finite extension $K/F$ is called \textbf{Galois} if $K/F$ is \uline{normal}\sidenote{normal just means it is a splitting field of something} and \uline{separable}.
 
 \section{Galois Theory}
-\defn If $K/F$ is an extension, then the \textbf{automorphism group} of $K/F$ is defined as \begin{align*}
+\defn \label[definition]{auto-group}If $K/F$ is an extension, then the \textbf{automorphism group} of $K/F$ is defined as \begin{align*}
     \Aut(K/F) &= \left\{ \sigma\in \Aut(K) \mid \sigma(a)=a\, \forall \, a\in F\right\}
 \end{align*}\addlink{Automorphism group of field extensions}
 That is, all the automorphisms of $K$ that also fix the field $F$.
@@ -864,5 +865,54 @@ That is, all the automorphisms of $K$ that also fix the field $F$.
     where $H$ is a subgroup of $\Aut(K/F)$ that fixes the field $E$, an extension of $F$ contained in $K$.
 \end{theorem}
 
+\spl
+\addcontentsline{toc}{subsection}{Phase III: Galois Theory}
+\begin{tcolorbox}
+    \textbf{Galois theory} is concerned with the \dashuline{study of roots of polynomials} by way of \dashuline{automorphisms of splitting fields} (of separable polynomials).
+
+    In particular, we are interested in what $$\Aut(K)=\{\sigma:K\to K \text{ isomorphisms}\}$$ (a group under composition) is. Naturally, such groups are \textit{finite}.
+\end{tcolorbox}\sidenote{review MATH171 finite groups!}
+\spl
+
+Last time, we showed that $K\supseteq \left\{\begin{matrix}
+    \Q & \text{ if char}(K)=0\\
+    \F_p &\text{ if char}(K)=p
+\end{matrix}\right\}$, since $\sigma(1)=\sigma(1^2)=(\sigma(1))^2$ implies that $\sigma(1)=1$ must always be true! Hence, $\sigma(n)=n$ must be true in char 0 fields, or $\sigma(\bar n)=\bar n$ if char>0 for all $n\in \Z$. Therefore, $\sigma$ \textbf{fixes} the prime subfield $\Q$ or $\F_p$.
+
+\rmk Why does \cref{auto-group} have to fix the field $F$? Because we've shown that $\Aut(K)=\left\{\begin{matrix}
+    \Aut(K/\Q) & \text{ if char}(K)=0\\
+    \Aut(K/\F_p) &\text{ if char}(K)=p
+\end{matrix}\right\}$.
+
+\begin{lemma}
+    If $K/F$ is an extension, $\alpha\in K$ is algebraic over $F$ and $\sigma\in \Aut(K/F)$, then $\sigma(\alpha)$ is a root of $m_{\alpha,F}(x)$.
+\end{lemma}
+\addlink{Roots of minimal polys under automorphisms is still a root}
+\begin{proof}
+    Observe that $m_{\alpha,F}(\alpha)=0=\sigma(0)=\sigma(m_{\alpha,F}(\alpha))$. Hence, since $\sigma(\alpha)=\alpha$ for all $\alpha\in F$, $$\sigma(a_0+a_1\alpha+\dots +a_n\alpha^n)=a_0+a_1\sigma(\alpha)+\dots + a_n\sigma(\alpha)^n=m_{\alpha,F}(\sigma(\alpha))$$
+\end{proof}
+
+So\sidenote{Recall: if irreducible $f(x)$ has one root in such $K$, then all roots lie in $K$.} if $f(x)\in F[x]$, then every $\sigma\in \Aut(K/F)$ \textbf{permutes} the roots of $f(x)$ that lie in $K$. It would be nice if the roots of $f(x)$ all lived in $K$. This is why we consider $K$ the splitting field of some polynomial over $F$.
+
+\begin{proposition}
+    If $K$ is the splitting field of some polynomial $f(x)$ over $F$ (so $[K:F]<\infty$), then $|\Aut(K/F)|\leq [K:F]$, with equality if $f(x)$ is separable.
+\end{proposition}
+\begin{proof}
+    We will prove a more general statement by induction.\sidenote{The prop above fixes $F_1=F_2$ and $\sigma$ being identity.}
+    If $\sigma:F_1\to F_2$ is an isomorphism, $f_1(x)\in F_1[x]$ and $f_2(x)=\sigma(f_1(x))\in F_2[x]$ and $E_1$ and $E_2$ are the splitting fields of $f_1$ and $f_2$ over $F_1$ and $F_2$ respectively. Then we would like to show that there are at most $[E_1:F_1]$ isomorphisms $\tau: E_1\to E_2$ such that $\tau_{|F_1}=\sigma$ with equality if $f_1$ separable.
+
+    \begin{enumerate}[align=left]
+        \item[\textit{Base case. }] If $[E_1:F_1]=[E_2:F_2]=1$, then $E_1=F_1$, $E_2=F_2$ and $\tau=\sigma$ is our only choice.
+        \item[\textit{Inductive step. }] Suppose we've proven the result for all extensions of degree $<n$ for some $n\geq 2$. Now consider $[E_1:F_1]=[E_2:F_2]=n$. Pick $\alpha\in E_1\backslash F_1$ and let $\beta\in E_2$ be any root of $\sigma(m_{\alpha,F_1}(x))$. Then $\sigma$ could be extended to $\rho:F_1(\alpha)\to F_2(\beta)$ such that $\rho(\alpha)=\beta$ and $\rho_{|F_1}=\sigma$. Observe that $[F_1(\alpha):F_1]=\deg(m_{\alpha,F_1}(x))$. Moreover, the number of extensions of $\sigma$ to $\rho$ equals the number of\textit{ distinct} roots of $\sigma(m_{\alpha,F_1}(x))$. Thus, the number of extensions of $\sigma$ to $F_1(\alpha)$ is \textit{at most} the degree of $m_{\alpha,F_1}(x)$ which is $[F_1(\alpha):F_1]$ with equality if $m_{\alpha,F_1}(x)$ is separable. Since $[E_1:F_1]=[E_2:F_2]=n$, we have $[E_1:F_1(\alpha)]<n$, by inductive hypothesis, there are at most $[E_1:F_1(\alpha)]$ ways of extending $\rho$ to $\tau:E_1\to E_2$. Hence, \begin{align*}
+            |\left\{ \text{extensions of }\sigma \text{ to } \tau\right\}| &= |\left\{ \text{extensions of }\sigma \text{ to } \rho\right\}||\left\{ \text{extensions of }\rho \text{ to } \tau\right\}|\\
+&\leq [F_1(\alpha):F_1][E_1:F_1(\alpha)]\\
+&=[E_1:F_1]
+        \end{align*}
+    \end{enumerate}
+    Looking at the case $F_1=F_2$, $E_1=E_2$, $\sigma=\mathrm{id}$, we get our result.
+\end{proof}
+
+\defn If $K/F$ is a normal extension, then the extension is \textbf{Galois} if $[K:F]=|\Aut(K/F)|$.
+\addlink{Galois extensions (alternate def)}
  %%%%%%%%%%%%%%%%%%%%%%%%%    
 \end{document} 
