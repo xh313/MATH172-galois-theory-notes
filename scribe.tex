@@ -584,7 +584,7 @@ Suppose $p(x)\in F[x]$ is an irreducible polynomial with coefficients in the fie
         Suppose $K/F$ is an extension \& $\alpha\in K$ is algebraic over $F$. Then there exists a \uline{unique, irreducible, and monic} polynomial $m_{\alpha,F}(x)\in F[x]$ that has $\alpha$ as a root.
     \end{proposition}
     \addlink{Minimal polynomial}
-    \rmk We observe that $m$ does depend on the base field $F$; $m_{\sqrt{2},\Q}(x)=x^2-2$, but $m_{\sqrt{2},\Q(\sqrt{2})}(x)=x^2-\sqrt{2}$.
+    \rmk We observe that $m$ does depend on the base field $F$; $m_{\sqrt{2},\Q}(x)=x^2-2$, but $m_{\sqrt{2},\Q(\sqrt{2})}(x)=x-\sqrt{2}$.
     \begin{proof}
         Since the subset of $F[x]$ \textit{satisfying $\alpha$ is a root} is nonempty, we can pick one with a \textbf{minimal degree}. By multiplying by an element of $F$ if necessary, we can assume WLOG this polynomial is \textbf{monic}. Call it $m_{\alpha,F}(x)$. 
         
@@ -838,32 +838,16 @@ This can be seen if we suppose $\alpha$ is a root of $p(x)$ (so $\alpha=t$). The
 \addlink{Separable extensions}
 \defn An algebraic extension $K/F$ is called (algebraically) \textbf{separable} if $m_{\alpha,F}(x)$ is separable for \textbf{all} $\alpha\in K$.
 
+\section{Galois Theory}
+
 \addlink{Galois extensions}
 \defn A finite extension $K/F$ is called \textbf{Galois} if $K/F$ is \uline{normal}\sidenote{normal just means it is a splitting field of something} and \uline{separable}.
 
-\section{Galois Theory}
+
 \defn \label[definition]{auto-group}If $K/F$ is an extension, then the \textbf{automorphism group} of $K/F$ is defined as \begin{align*}
     \Aut(K/F) &= \left\{ \sigma\in \Aut(K) \mid \sigma(a)=a\, \forall \, a\in F\right\}
 \end{align*}\addlink{Automorphism group of field extensions}
 That is, all the automorphisms of $K$ that also fix the field $F$.
-
-\begin{theorem}[The Fundamental Theorem of Galois Theory]
-    \addlink{Fundamental Theorem of Galois Theory}\hfill
-
-    If $K/F$ is Galois, then
-    \[\begin{tikzcd}[ampersand replacement=\&,cramped,column sep=large,row sep=2.25em]
-        K \&\&\& 1 \\
-        E \&\&\& H \\
-        F \&\&\& {\mathrm{Aut}(K/F)}
-        \arrow["{\{\alpha\in K\, \mid\, \sigma(\alpha)=\alpha\; \forall\; \sigma\in H\}}"', shift right=2, from=2-4, to=2-1]
-        \arrow["{\mathrm{Aut}(K/E)}"', shift right=2, from=2-1, to=2-4]
-        \arrow[no head, from=1-1, to=2-1]
-        \arrow[no head, from=2-1, to=3-1]
-        \arrow[no head, from=1-4, to=2-4]
-        \arrow[no head, from=2-4, to=3-4]
-    \end{tikzcd}\]
-    where $H$ is a subgroup of $\Aut(K/F)$ that fixes the field $E$, an extension of $F$ contained in $K$.
-\end{theorem}
 
 \spl
 \addcontentsline{toc}{subsection}{Phase III: Galois Theory}
@@ -931,5 +915,75 @@ So\sidenote{Recall: if irreducible $f(x)$ has one root in such $K$, then all roo
 
 \defn If $K/F$ is a normal extension, then the extension is \textbf{Galois} if $[K:F]=|\Aut(K/F)|$.
 \addlink{Galois extensions (alternate def)}
+
+\rmk Notation: if $K/F$ is Galois, then use $\Gal(K/F)$ for $\Aut(K/F)$.
+
+\subsection{Fixed Fields and Automorphism Groups}
+\defn Suppose $K/F$ is a field extension. If subgroup $H\leq \Aut(K/F)$, then the \textbf{fixed field} of $H$ is given by $K_H = \{\alpha\in K \mid \sigma(\alpha)=\alpha \text{ for all } \sigma\in H\}$. \sidenote{Observe that $K_H$ is indeed a field (the sum, products etc. are also fixed by $\sigma$); moreover, it is an intermediate extension $F\subseteq K_H \subseteq K$.}
+\addlink{Fixed field}
+
+\rmk Also, observe that if $F\subseteq E\subseteq K$, then $\Aut(K/E)\leq \Aut(K/F)$.
+
+\begin{lemma}
+    Suppose $K/F$ is an extension. Then: \begin{enumerate}[label=(\arabic{*})]
+        \item If $H_1,H_2\leq \Aut(K/F)$ with $H_1\leq H_2$, then $K_{H_2}\subseteq K_{H_1}$.
+        \item If $F\subseteq E_1\subseteq E_2\subseteq K$ are two intermediate extensions, then $\Aut(K/E_2)\leq \Aut(K/E_1) \leq \Aut(K/F)$.
+    \end{enumerate}
+\end{lemma}
+
+\eg $\Q$ is an intermediate extensions of $\Q(\sqrt[3]{2})/\Q$. Then $\Aut(\Q/\Q)=\{\mathbb{1}\}$. We further observe that since automorphisms permute roots, $\Aut(\Q(\sqrt[3]{2})/\Q) = \{\mathbb{1}\}$. Hence $\Aut(\Q/\Q)=\Aut(\Q(\sqrt[3]{2})/\Q)$ and so the fixed field by $\Q(\sqrt[3]{2})$ is given by $\Q(\sqrt[3]{2})_{\Aut(\Q/\Q)}=\Q(\sqrt[3]{2})$. We note that $\Q(\sqrt[3]{2})$ is not Galois!
+\sidenote{Roots of $x^3-2$ are $\sqrt[3]{2}, \zeta_3 \sqrt[3]{2}, \zeta_3^2 \sqrt[3]{2}$, so two roots are not in $\Q(\sqrt[3]{2})$, and so $\sqrt[3]{2}$ could be only mapped to itself.}
+
+
+\begin{theorem}[The Fundamental Theorem of Galois Theory]
+    \addlink{Fundamental Theorem of Galois Theory} If $K/F$ is a (finite) Galois extension, then the maps $H\mapsto K_H$ and $E\mapsto \Aut(K/E)$ gives an \textit{inclusion-reversing} \textbf{bijection} between the subgroups of $\Aut(K/F)$ and the intermediate extensions of $K/F$. \sidenote{We see if $K/F$ is Galois, then $K/E$ is also Galois as if $K$ is the splitting field of some poly in $F$, then it's certainly true for $E$.}
+    
+    Furthermore, $[K:E]=|\Aut(K/E)|$, and $$[E:F] = |\Aut(K/F):\Aut(K/E)| = |\Aut(K/F)|/|\Aut(K/E)|$$
+
+    Moreover, $E/F$ is Galois \ifnif $\Aut(K/E)$ is a \textbf{normal subgroup} of $\Aut(K/F)$, in which case $$\Aut(E/F)=\Aut(K/F)/\Aut(K/E)$$
+
+    In other words,
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped,column sep=large,row sep=2.25em]
+        K \&\&\& 1 \\
+        E \&\&\& {H=\Aut(K/E)} \\
+        F \&\&\& {\mathrm{Aut}(K/F)}
+        \arrow["{\{\alpha\in K\, \mid\, \sigma(\alpha)=\alpha\; \forall\; \sigma\in H\}}"', shift right=2, from=2-4, to=2-1]
+        \arrow["{\mathrm{Aut}(K/E)}"', shift right=2, from=2-1, to=2-4]
+        \arrow[no head, from=1-1, to=2-1]
+        \arrow[no head, from=2-1, to=3-1]
+        \arrow[no head, from=1-4, to=2-4]
+        \arrow[no head, from=2-4, to=3-4]
+    \end{tikzcd}\]
+    where $H$ is a subgroup of $\Aut(K/F)$ that fixes the field $E$, an extension of $F$ contained in $K$. If $H\nsub \Aut(K/F)$, then $E/F$ is normal.
+\end{theorem}
+
+\eg Consider $\Q(\zeta_3, \sqrt[3]{2})/\Q$, the splitting field extension of $x^3-2$. \sidenote{$|\zeta_3|=3$}
+\[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	{\mathbb{Q}(\zeta_3,\sqrt[3]2)} \\
+	{\mathbb{Q}(\sqrt[3]2)} \\
+	\& {\mathbb Q(\zeta_3)} \\
+	{\mathbb Q}
+	\arrow["2", no head, from=1-1, to=2-1]
+	\arrow["3", no head, from=2-1, to=4-1]
+	\arrow["3", no head, from=1-1, to=3-2]
+	\arrow["2"', no head, from=4-1, to=3-2]
+	\arrow["{(x^3-1)}"', draw=none, from=2-1, to=4-1]
+	\arrow["{(x^2+x+1)}"', draw=none, from=1-1, to=2-1]
+\end{tikzcd}\]
+Let $\sigma,\tau \in \Aut(\mathbb{Q}(\zeta_3,\sqrt[3]2)/\Q)$ be given by:
+\begin{center}
+    \begin{tabular}[t]{ll}
+        $\sigma: \left\{ \begin{array}{cl}
+            \sqrt[3]2 \mapsto \zeta_3 \sqrt[3]2\\
+                    \zeta_3 \mapsto \zeta_3
+            \end{array} \right.$ 
+            & $\tau: \left\{ \begin{array}{cl}
+                \sqrt[3]2 \mapsto \sqrt[3]2\\
+                        \zeta_3 \mapsto \zeta_3^2
+                \end{array} \right.$
+    \end{tabular}
+\end{center}
+So $\genset{\sigma,\tau\mid \sigma^3=\tau^2=id, \sigma\tau=\tau\sigma^2}\cong S_3$.
+
  %%%%%%%%%%%%%%%%%%%%%%%%%    
 \end{document} 
