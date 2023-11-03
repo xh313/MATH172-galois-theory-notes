@@ -14,6 +14,7 @@
 
 \spl
 
+\newpage
 \pagestyle{updated}
 
 \section{Rings! Or why $x^2-2$ has roots.}
@@ -957,7 +958,7 @@ So\sidenote{Recall: if irreducible $f(x)$ has one root in such $K$, then all roo
     where $H$ is a subgroup of $\Aut(K/F)$ that fixes the field $E$, an extension of $F$ contained in $K$. If $H\nsub \Aut(K/F)$, then $E/F$ is normal.
 \end{theorem}
 
-\eg Consider $\Q(\zeta_3, \sqrt[3]{2})/\Q$, the splitting field extension of $x^3-2$. \sidenote{$|\zeta_3|=3$}
+\eg \addlink{Example of Galois correspondence}Consider $\Q(\zeta_3, \sqrt[3]{2})/\Q$, the splitting field extension of $x^3-2$.\footnote{Suppose $\zeta$ is a primitive $n$th root of unity; then so is $\zeta^k$ \ifnif the gcd $(k,n)=1$, i.e. $k,n$ are relatively prime.} \sidenote{$|\zeta_3|=3$, a primitive 3rd root of unity.}
 \[\begin{tikzcd}[ampersand replacement=\&,cramped]
 	{\mathbb{Q}(\zeta_3,\sqrt[3]2)} \\
 	{\mathbb{Q}(\sqrt[3]2)} \\
@@ -972,6 +973,7 @@ So\sidenote{Recall: if irreducible $f(x)$ has one root in such $K$, then all roo
 \end{tikzcd}\]
 Let $\sigma,\tau \in \Aut(\mathbb{Q}(\zeta_3,\sqrt[3]2)/\Q)$ be given by:
 \begin{center}
+    \sidenote{Isomorphisms preserve order, so they \textbf{must} take an $n$th root of unity to another $n$th root of unity!}
     \begin{tabular}[t]{ll}
         $\sigma: \left\{ \begin{array}{cl}
             \sqrt[3]2 \mapsto \zeta_3 \sqrt[3]2\\
@@ -983,7 +985,65 @@ Let $\sigma,\tau \in \Aut(\mathbb{Q}(\zeta_3,\sqrt[3]2)/\Q)$ be given by:
                 \end{array} \right.$
     \end{tabular}
 \end{center}
-So $\genset{\sigma,\tau\mid \sigma^3=\tau^2=id, \sigma\tau=\tau\sigma^2}\cong S_3$.
+So $\genset{\sigma,\tau\mid \sigma^3=\tau^2=id, \sigma\tau=\tau\sigma^2}\cong S_3$. 
+
+Since this is a subgroup of $\Gal(\mathbb{Q}(\zeta_3,\sqrt[3]2)/\Q)$ that has the same finite order of 6, this must just be $\Gal(\mathbb{Q}(\zeta_3,\sqrt[3]2)/\Q)$ itself; hence, $\Gal(\mathbb{Q}(\zeta_3,\sqrt[3]2)/\Q)\cong S_3$.
+
+Now we look at the subgroups of $S_3$ (in reverse):
+\[\begin{tikzcd}[ampersand replacement=\&,cramped,sep=tiny]
+	\& 1 \\
+	\&\& {\langle \tau\rangle} \& {\langle \sigma\tau\rangle} \& {\langle \sigma^2\tau\rangle} \\
+	\langle\sigma\rangle \\
+	\& {\mathrm{Gal}(\mathbb Q(\zeta_3,\sqrt[3]2)/\mathbb Q)}
+	\arrow["3", no head, from=1-2, to=3-1]
+	\arrow[no head, from=1-2, to=2-3]
+	\arrow[no head, from=1-2, to=2-4]
+	\arrow["2", no head, from=1-2, to=2-5]
+	\arrow["2", no head, from=3-1, to=4-2]
+    \arrow["{\nsub}"', no head, from=3-1, to=4-2]
+	\arrow[no head, from=2-3, to=4-2]
+	\arrow[no head, from=2-4, to=4-2]
+	\arrow["3", no head, from=2-5, to=4-2]
+\end{tikzcd}\]
+And then think about the \textbf{fixed field} of each subgroup correspondingly:\sidenote{Remember normal extn means `is splitting field', i.e. `one root -> all roots'}
+\[\begin{tikzcd}[ampersand replacement=\&,cramped,sep=scriptsize]
+	\& {\mathbb Q(\zeta_3,\sqrt[3]2)} \\
+	\&\& {\mathbb Q(\sqrt[3]2)} \& {\mathbb Q(\zeta_3^2\sqrt[3]2)} \& {\mathbb Q(\zeta_3\sqrt[3]2)} \\
+	{\mathbb Q(\zeta_3)} \\
+	\& {\mathbb Q}
+	\arrow[no head, from=1-2, to=3-1]
+	\arrow[no head, from=1-2, to=2-3]
+	\arrow[no head, from=1-2, to=2-4]
+	\arrow[no head, from=1-2, to=2-5]
+	\arrow["{\deg 2}", no head, from=3-1, to=4-2]
+    \arrow["{\text{normal extn}}"', no head, from=3-1, to=4-2]
+	\arrow["{\deg 3}"', no head, from=2-3, to=4-2]
+	\arrow[no head, from=2-4, to=4-2]
+	\arrow[no head, from=2-5, to=4-2]
+\end{tikzcd}\]
+Note that the normal extension corresponds to the normal subgroup!\sidenote{$\Q(\sqrt[3]{2})$ is not Galois!}
+
+\spl
+
+\begin{proposition}\addlink{Finite Galois extensions are simple}
+    If $K/F$ is a finite Galois extension, then $K=F(\alpha)$ for some $\alpha\in K$.
+\end{proposition}
+
+\defn $K=F(\alpha)$ is a \textbf{simple} extension of $F$ and $\alpha$ is a primitive element.
+
+\begin{proof}
+    We first assume $|F|=\infty$.
+
+    Recall that $K/F$ is finite \ifnif $K=F(\alpha_1,\alpha_2,\dots,\alpha_n)$ where $\alpha_i$ is algebraic over $F$. We will proceed by induction on $n$, whose base case $n=1$ gives a simple extension $F(\alpha_1)/F$.
+
+    Recursive case: assume that for some $k\geq 1$ we have $F(\alpha_1,\dots,\alpha_k)$ being a simple extension $F(\alpha)$. Let $K/F$ be Galois and $K=F(\alpha_1,\dots, \alpha_{k-1}, \alpha,\beta)$. 
+    
+    Let $E=F(\alpha_1,\dots, \alpha_{k-1})$ \sidenote{such that $K=E(\alpha,\beta)$}and consider the intermediate family of extensions $\{E(\alpha+t\beta)\mid t\in F\}$. Since $|\Gal(K/F)|<\infty$ as we are talking about finite Galois extensions, there are \dashuline{finitely many distinct such extensions}, so $E(\alpha+t_1\beta)=E(\alpha+t_2\beta)$ for some $t_1\neq t_2$.
+
+    Now we see that $\alpha+t_1\beta$ and $\alpha+t_2\beta$ must be in the same field $E(\alpha+t_1\beta)$. Hence, $(\alpha+t_1\beta)-(\alpha+t_2\beta)$ are in the field, so $(t_1-t_2)^{-1}\left((\alpha+t_1\beta)-(\alpha+t_2\beta)\right)=\beta$ is also in the field. Similarly, $\alpha\in E(\alpha+t_1\beta)$. Therefore, $K=E(\alpha,\beta)=E(\alpha+t_1\beta)=F(\alpha_1,\dots,\alpha_{k-1}, \alpha+t_1\beta)$, which has $k$ elements adjoined and is therefore simple.
+\end{proof}
+
+
 
  %%%%%%%%%%%%%%%%%%%%%%%%%    
 \end{document} 
