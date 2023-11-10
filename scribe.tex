@@ -872,7 +872,7 @@ Last time, we showed that $K\supseteq \left\{\begin{matrix}
 \begin{lemma}
     If $K/F$ is an extension, $\alpha\in K$ is algebraic over $F$ and $\sigma\in \Aut(K/F)$, then $\sigma(\alpha)$ is a root of $m_{\alpha,F}(x)$.
 \end{lemma}
-\addlink{Roots of minimal polys under automorphisms is still a root}
+\addlink{Roots of minimal polys under automorphisms are still roots}
 \begin{proof}
     Observe that $m_{\alpha,F}(\alpha)=0=\sigma(0)=\sigma(m_{\alpha,F}(\alpha))$. Hence, since $\sigma(\alpha)=\alpha$ for all $\alpha\in F$, $$\sigma(a_0+a_1\alpha+\dots +a_n\alpha^n)=a_0+a_1\sigma(\alpha)+\dots + a_n\sigma(\alpha)^n=m_{\alpha,F}(\sigma(\alpha))$$
 \end{proof}
@@ -1025,7 +1025,7 @@ Note that the normal extension corresponds to the normal subgroup!\sidenote{$\Q(
 
 \spl
 
-\begin{proposition}\label[prop]{prop:finite-galois-simple}\addlink{Finite Galois extensions are simple}
+\begin{proposition}[Primitive Element Theorem]\label[prop]{prop:finite-galois-simple}\addlink{Finite Galois extensions are simple}
     If $K/F$ is a \textbf{finite Galois} extension, then $K=F(\alpha)$ for some $\alpha\in K$.
 \end{proposition}
 
@@ -1074,6 +1074,7 @@ Note that the normal extension corresponds to the normal subgroup!\sidenote{$\Q(
 
 In $\C$, we have $e^{i\frac{2\pi}{n}}$ is a primitive $n$-th root of unity. Suppose $\zeta_n\in \C$ is a primitive $n$-th root of unity.
 
+\addlink{Cyclotomic polynomial}
 \defn The \textbf{cyclotomic polynomial} is given by $$\Phi_n(x)=\underset{(n,k)=1}{\prod_{{0\leq k <n}}}(x-\zeta_n^k)$$
 Properties: \begin{itemize}
     \item $x^n-1=\prod_{0\leq k <n}(x-\zeta_n^k)=\prod_{d|n}\prod_{\underset{(n,k)=d}{0\leq k<n}}(x-\zeta_n^k)=\prod_{d|n}\Phi_d(x)$
@@ -1086,9 +1087,72 @@ Properties: \begin{itemize}
     \rmk If $K$ is a finite field, then $K^{\times}=\genset{z}$.
     \begin{proof}
         Since $K$ is finite, it must be an extension of $\F_p=\znz{\textit{p}}$ for some prime $p$; so $|K^{\times}| = p^n-1$ since $|K|=p^n$. For $d|p^n-1$, let $\mathcal{O}_d=\{z\in K^{\times}\mid |z|=d\}$. Observe that $K^{\times}=\bigcup_{d|p^n-1}\mathcal{O}_d$ is a disjoint union, and so $$|K^{\times}=\sum_{d|p^n-1}|\mathcal{O}_d|=p^n-1=\sum_{d|p^n-1}\homo{d}$$
-        which implies that $|\mathcal{O}_d|=\homo{d}$ for all $d|p^n-1$.
+        which implies that $|\mathcal{O}_d|=\homo{d}$ for all $d|p^n-1$. Hence, in particular, $\mathcal{O}_{p^n-1}$ is nonempty, so any $z\in \mathcal{O}_{p^n-1}$ generates $K^{\times}$.
     \end{proof}
+
+    \rmk This implies that the Primitive Element Theorem (see \cref{prop:finite-galois-simple}) is also true for finite fields.
+
 }
 
+\rmk $\Phi _n(x)$ is irreducible over $\Q$, and so it is the minimal polynomial $m_{\zeta_n, \Q}(x)$.
+
+\lemma \label[lemma]{lemma:between-every-two-roots-exists-a-Galois-isomorphism}Suppose\sidenote{\begin{tikzcd}[ampersand replacement=\&,cramped,sep=tiny]
+	{\sigma: K} \& K \\
+	{F(\alpha)} \& {F(\beta)} \\
+	{\text{id}: F} \& F
+	\arrow[from=3-1, to=3-2]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=1-1, to=1-2]
+	\arrow[no head, from=1-1, to=2-1]
+	\arrow[no head, from=2-1, to=3-1]
+	\arrow[no head, from=1-2, to=2-2]
+	\arrow[no head, from=2-2, to=3-2]
+\end{tikzcd}} $F$ is a field where all irreducible polynomials are separable. \addlink{Between every two roots exists a Galois isomorphism}
+Let $p(x)\in F[x]$ irreducible and split completely in a Galois extension $K/F$, and let $\alpha,\beta$ be two roots of $p(x)$. Then there exists $\sigma\in \Gal(K/F)$ such that $\sigma(\alpha)=\beta$.
+
+\addlink{Cyclotomic extension}
+\defn The extension $\Q(\zeta_n)/\Q$ is called the $n$-th \textbf{cyclotomic extension} of $\Q$.
+\rmk{All other primitive $n$-th roots of unity are of the form $\zeta_n^a$ w/ $(a,n)=1$, so $\Q(\zeta_n)$ is the splitting field of $\Phi_n(x)$ over $\Q$, so the extension is Galois.}
+
+If $\sigma\in \Gal(\Q(\zeta_n)/\Q)$, then $\sigma$ is completely determined by $\sigma(\zeta_n)$. But $\sigma(\zeta_n)$ must be another primitive $n$-th root of unity, so $\sigma(\zeta_n)$ must be $\zeta_n^a$ for some $0<a<n$ with $(a,n)=1$. 
+\addlink{Galois groups of cyclotomic fields are $\Z/n\Z$}
+
+Moreover, by \cref{lemma:between-every-two-roots-exists-a-Galois-isomorphism}, each $a$ corresponds to a Galois automorphism $\sigma$; in fact, the map $\Gal(\Q(\zeta_n)/\Q)\xrightarrow{\sim} (\Z/n\Z)^\times$ where $\sigma\mapsto \bar a$ is a \textbf{group isomorphism}.
+
+\addlink{Abelian Galois extension}
+\defn A Galois extension $K/F$ is abelian if $\Gal(K/F)$ is abelian.\sidenote{All finite field extensions are abelian}
+
+\begin{corollary}
+    $\Q(\zeta_n)/\Q$ is abelian.
+\end{corollary}
+
+\begin{theorem}[Kronecker-Wober]\addlink{All abelian extensions are conatined in cyclotomic extensions}
+    If $K/\Q$ is abelian, then $K\subseteq \Q(\zeta_n)$ for some $n$.
+\end{theorem}
+
+\subsection{Radical extensions and soluble groups}
+
+\eg Suppose $K$ is the splitting field of $x^4-2$ over $\Q$. Then $K=\Q(\sqrt[4]{2},i)$\sidenote{since $\zeta_4=i$}.
+
+Let\sidenote{{(not showing all intermed extns)}
+
+\begin{tikzcd}[ampersand replacement=\&,cramped, sep=tiny]
+	\& K \\
+	\&\& {\mathbb Q(\sqrt[4]2)} \\
+	{\mathbb Q(i)} \\
+	\& {\mathbb Q} \& {}
+	\arrow[from=3-1, to=4-2]
+	\arrow["\genset{\sigma}", from=1-2, to=3-1]
+	\arrow[from=1-2, to=2-3]
+	\arrow[from=2-3, to=4-2]
+\end{tikzcd}} 
+$\sigma:\begin{cases}
+    \sqrt[4]2\mapsto i\sqrt[4]2\\
+    i\mapsto i
+\end{cases}$ and $\sigma:\begin{cases}
+    \sqrt[4]2\mapsto \sqrt[4]2\\
+    i\mapsto -i
+\end{cases}$. \\We look at the subgroup generated by $\sigma,\tau$: $$\genset{\sigma,\tau\mid \sigma^4=\tau^2=1, \sigma\tau=\tau\sigma^3}\cong D_8$$
+Since $[K/\Q]=8$, we have found the Galois group of $K/\Q$.
  %%%%%%%%%%%%%%%%%%%%%%%%%    
 \end{document} 
