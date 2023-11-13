@@ -796,8 +796,8 @@ From this definition, we can check that the usual differential rules hold.
 \begin{lemma}\label[lemma]{irred-non-sep}
     If $f(x)\in F[x]$ is\textbf{ irreducible and not separable}, then $f'(x)=0$.
 
-    \begin{proof}[\tbd{finish proof}]
-        
+    \begin{proof}
+        If $f(x)$ is not separable, we know that there is at least one repeated root. We call it $\alpha$. Then let $m_{\alpha,F}(x)$ be the minimal polynomial of $\alpha$ over $F$ and we have $f(x)=c\cdot m_{\alpha,F}(x)$ for some constant $c\in F$. Therefore, $\deg(f(x))=\deg(m_{\alpha,F}(x))$. However, by the previous lemma, $f'(\alpha)=0$ must also exist since $\alpha$ is a repeated root. If $f'(x)\neq 0$, then we found a polynomial with degree less than the minimal polynomial that has $\alpha$ as a root, which cannot happen. Therefore, $f'(x)=0$.
     \end{proof}
 \end{lemma}
 
