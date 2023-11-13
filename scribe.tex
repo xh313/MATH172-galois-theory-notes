@@ -1086,7 +1086,7 @@ Properties: \begin{itemize}
 \ontangent{
     \rmk If $K$ is a finite field, then $K^{\times}=\genset{z}$.
     \begin{proof}
-        Since $K$ is finite, it must be an extension of $\F_p=\znz{\textit{p}}$ for some prime $p$; so $|K^{\times}| = p^n-1$ since $|K|=p^n$. For $d|p^n-1$, let $\mathcal{O}_d=\{z\in K^{\times}\mid |z|=d\}$. Observe that $K^{\times}=\bigcup_{d|p^n-1}\mathcal{O}_d$ is a disjoint union, and so $$|K^{\times}=\sum_{d|p^n-1}|\mathcal{O}_d|=p^n-1=\sum_{d|p^n-1}\homo{d}$$
+        Since $K$ is finite, it must be an extension of $\F_p=\znz{\textit{p}}$ for some prime $p$; so $|K^{\times}| = p^n-1$ since $|K|=p^n$. For $d|p^n-1$, let $\mathcal{O}_d=\{z\in K^{\times}\mid |z|=d\}$. Observe that $K^{\times}=\bigcup_{d|p^n-1}\mathcal{O}_d$ is a disjoint union, and so $$|K^{\times}|=\sum_{d|p^n-1}|\mathcal{O}_d|=p^n-1=\sum_{d|p^n-1}\homo{d}$$
         which implies that $|\mathcal{O}_d|=\homo{d}$ for all $d|p^n-1$. Hence, in particular, $\mathcal{O}_{p^n-1}$ is nonempty, so any $z\in \mathcal{O}_{p^n-1}$ generates $K^{\times}$.
     \end{proof}
 
