@@ -1130,6 +1130,78 @@ Moreover, by \cref{lemma:between-every-two-roots-exists-a-Galois-isomorphism}, e
     If $K/\Q$ is abelian, then $K\subseteq \Q(\zeta_n)$ for some $n$.
 \end{theorem}
 
+\subsubsection{Proofs of FToGT}
+\begin{itemize}
+    \item The Galois correspondence is inclusion reversing: $H_1\leq H_2$ \ifnif $K_{H_1}\supseteq K_{H_2}$.\sidenote{Just try it!}
+    \item If $K/F$ is Galois and $E$ is an intermediate extension, then $K/E$ is also Galois.\sidenote{Anything in $F$ is also in $E$!}
+    \item The Galois correspondence is a bijection.
+    \begin{proof}
+        \begin{itemize}[align=left]
+            \item[($\implies$)] Suppose $E$ is an intermediate extension of $K/F$.
+            % https://q.uiver.app/#q=WzAsMTQsWzAsMCwiSyJdLFswLDIsIkUiXSxbMCwzLCJGIl0sWzEsMCwiMSJdLFsxLDIsIlxcdGV4dHtHYWx9KEsvRSk9SCJdLFsxLDMsIlxcdGV4dHtHYWx9KEsvRikiXSxbMiwwLCJLIl0sWzIsMSwiS19IIl0sWzIsMiwiRSJdLFsyLDMsIkYiXSxbMywwLCIxIl0sWzMsMSwiXFx0ZXh0e0dhbH0oSy9LX0gpIl0sWzMsMiwiXFx0ZXh0e0dhbH0oSy9FKSJdLFszLDMsIlxcdGV4dHtHYWx9KEsvRikiXSxbMCwxLCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEsMiwiIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFszLDQsIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNCw1LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzYsNywiIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs3LDgsIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbOCw5LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEwLDExLCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzExLDEyLCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEyLDEzLCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEsNCwiZyIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbNCw3LCJoIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFs3LDExLCJnIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dXQ==
+\[\begin{tikzcd}[ampersand replacement=\&,cramped,row sep=small]
+	K \& 1 \& K \& 1 \\
+	\&\& {K_H} \& {\text{Gal}(K/K_H)} \\
+	E \& {\text{Gal}(K/E)=H} \& E \& {\text{Gal}(K/E)} \\
+	F \& {\text{Gal}(K/F)} \& F \& {\text{Gal}(K/F)}
+	\arrow[no head, from=1-1, to=3-1]
+	\arrow[no head, from=3-1, to=4-1]
+	\arrow[no head, from=1-2, to=3-2]
+	\arrow[no head, from=3-2, to=4-2]
+	\arrow[no head, from=1-3, to=2-3]
+	\arrow[no head, from=2-3, to=3-3]
+	\arrow[no head, from=3-3, to=4-3]
+	\arrow[no head, from=1-4, to=2-4]
+	\arrow[no head, from=2-4, to=3-4]
+	\arrow[no head, from=3-4, to=4-4]
+	\arrow["g", maps to, from=3-1, to=3-2]
+	\arrow["h", maps to, from=3-2, to=2-3]
+	\arrow["g", maps to, from=2-3, to=2-4]
+\end{tikzcd}\]
+\tbd{To be continued}
+            \item[($\impliedby$)] Now suppose $H\leq G$. We have: \[\begin{tikzcd}[ampersand replacement=\&,cramped,row sep=small]
+                1 \& {K=E(\alpha)} \\
+                H \& {K_H=E} \\
+                G \& F
+                \arrow["h", maps to, from=2-1, to=2-2]
+                \arrow[no head, from=1-1, to=2-1]
+                \arrow[no head, from=2-1, to=3-1]
+                \arrow[no head, from=1-2, to=2-2]
+                \arrow[no head, from=2-2, to=3-2]
+            \end{tikzcd}\]
+            for some $\alpha\in K$ by primitive element theorem.\sidenote{In this note, PET is proven through Galois correspondence, but D\&F offers a different proof.} So $|H|\leq |\Gal(K/E)|= [K:E]=\deg(m_{\alpha,E}(x))$.
+
+            Consider $f(x)=\prod_{\alpha_i\in A}(x-\alpha_i)$, where $A=\{\sigma(\alpha)\mid \sigma\in H\}$. We note that $\deg(f(x))\leq |H|$. Furthermore, if $\sigma\in H$, then $\sigma(f(x))=\prod_{\alpha_i\in A}(x-\sigma(\alpha_i)) = \prod_{\alpha_i\in A}(x-\alpha_i)=f(x)$ since $\sigma$ just permutes $A$. So $f(x)\in K_H[x]=E[x]$ and $f(\alpha)=0$, meaning that $m_{\alpha,E}\mid f(x)\implies \deg(m_{\alpha,E}(x))\leq \deg(f(x))\leq |H|$. Therefore:\begin{align*}
+                |H|\leq |\Gal(K/E)|= [K:E]=\deg(m_{\alpha,E}(x))\leq \deg(f(x))\leq |H|
+            \end{align*}
+            Thus, $|H|=|Gal(K/E)|$, implying $H=\Gal(K/E)$ since they are finite groups containing each other. In other words, $g(h(H))=H$ \ifnif $h$ is injective and $g$ is surjective.
+        \end{itemize}
+    \end{proof}
+
+    \item If $E$ is an intermediate extension of $K/F$, then $E/F$ is Galois \ifnif $\Gal(K/E)\nsub \Gal(K/F)$.
+    \begin{proof}
+        Recall
+        \footnote{
+            We first prove that the map $\sigma \to \varphi \sigma \varphi^{-1}$ is indeed a map between $\Aut(K/F) \to \Aut(K'/F')$. We know that $\varphi$ is an isomorphism from $K$ to $K'$, so $\inv{\varphi}:K'\to K$ mapping $F'$ to $F$; next, $\sigma$ is an isomorphism $K\to K$ fixing $F$, and $\varphi: K\to K'$ mapping $F$ to $F'$, so we conclude that $\varphi \sigma \varphi^{-1}$ is an isomorphism from $K'$ to itself fixing $F'$ precisely. Hence, it is an automorphism in the group $\Aut(K'/F')$.
+
+Next we prove that this map is a group homomorphism. Let the map $\sigma \to \varphi \sigma \varphi^{-1}$ be $\phi$. We begin by checking that $\phi(\sigma_1\sigma_2)=\phi(\sigma_1)\phi(\sigma_2)$: \begin{align*}
+    \phi(\sigma_1\sigma_2)&=\varphi \sigma_1\sigma_2 \varphi^{-1}\\
+    &= \varphi \sigma_1 \circ \mathrm{id}\circ\sigma_2 \varphi^{-1}\\
+    &= \varphi \sigma_1 (\varphi^{-1}\varphi) \sigma_2 \varphi^{-1}\\
+    &= (\varphi \sigma_1 \varphi^{-1})(\varphi \sigma_2 \varphi^{-1})\\
+    &= \phi(\sigma_1)\phi(\sigma_2)
+\end{align*}
+Hence it is indeed a group homomorphism. Finally, we observe that it is bijective. Since all $\varphi \sigma \varphi^{-1}$ must correspond to a $\sigma$, it is surjective; in addition, if $\varphi \sigma_1 \varphi^{-1}=\varphi \sigma_2 \varphi^{-1}$, then we have:\begin{align*}
+    \varphi \sigma_1 \varphi^{-1} &= \varphi \sigma_2\varphi^{-1}\\
+    \inv{\varphi}\varphi \sigma_1 \varphi^{-1}\varphi&=\inv{\varphi}\varphi \sigma_2 \varphi^{-1}\varphi\\
+    \sigma_1&=\sigma_2
+\end{align*}
+Therefore, we conclude that the map $\sigma \to \varphi \sigma \varphi^{-1}$ defines a group isomorphism $\Aut(K/F) \to \Aut(K'/F')$.\qed
+        }
+        that $\varphi\in \Gal(K/F)$ induces a group isomorphism $\Gal(K/E)\xrightarrow{\sim}\Gal(K/\varphi(E))$ where $\sigma\mapsto \varphi\sigma\inv{\varphi}$. Hence $E/F$ is Galois \ifnif $E$ is normal over $F$ \ifnif \tbd{finish proof}
+    \end{proof}
+\end{itemize}
+
 \subsection{Radical extensions and soluble groups}
 
 \eg Suppose $K$ is the splitting field of $x^4-2$ over $\Q$. Then $K=\Q(\sqrt[4]{2},i)$\sidenote{since $\zeta_4=i$}.
@@ -1154,5 +1226,8 @@ $\sigma:\begin{cases}
     i\mapsto -i
 \end{cases}$. \\We look at the subgroup generated by $\sigma,\tau$: $$\genset{\sigma,\tau\mid \sigma^4=\tau^2=1, \sigma\tau=\tau\sigma^3}\cong D_8$$
 Since $[K/\Q]=8$, we have found the Galois group of $K/\Q$.
+
+
+
  %%%%%%%%%%%%%%%%%%%%%%%%%    
 \end{document} 
