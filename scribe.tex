@@ -1240,6 +1240,7 @@ $\sigma:\begin{cases}
 Since $[K/\Q]=8$, we have found the Galois group of $K/\Q$.
 
 \defn A group $G$ is \textbf{solvable} if there exists a subgroup sequence $\{1\}=G_0\nsub G_1\nsub \dots \nsub G_{r-1}\nsub G_r=G$ such that every $G_i/G_{i-1}$ is abelian (cyclic).\sidenote{Not saying that all the $G_i$ is normal in $G$.}
+\addlink{Solvable if chain of abelian normal subgroups}
 
 \begin{proposition}
     If $G$ is a solvable group, then there exists a subgroup sequence $\{1\}=G_0\nsub G_1\nsub \dots \nsub G_{r-1}\nsub G_r=G$ in $G$ such that $H_i/H_{i-1}$ is cyclic.
@@ -1248,9 +1249,52 @@ Since $[K/\Q]=8$, we have found the Galois group of $K/\Q$.
     We'll proceed by induction on $|G|$. If $|G|=1,2,3$, they are cyclic because prime order groups are cyclic.
 
     Suppose now that the result is true for all $G$ with $|G|\leq k$ for some $k\geq 3$. If $G$ is solvable and $|G|=k+1$, then there exists $\{1\}=G_0\nsub G_1\nsub \dots \nsub G_{r-1}\nsub G_r=G$. Let $H$ be a proper normal subgroup of $G$ containing $G_{r-1}$ that is maximal in the sense that there are no more intermediate normal subgroup. 
+
+    \tbd{finish this}
+\end{proof}
+
+\rmk Recall that $A_5$ is a simple and nonabelian group. Therefore, it is not solvable.
+
+Since subgroups and quotient groups of solvable groups are solvable, we get:
+\begin{corollary}
+    $S_5$ is not solvable.
+\end{corollary}\addlink{$S_5$ is not solvable}
+
+Why do we care? Suppose $F$ is a field containing all $n$-th roots of unity.
+
+\addlink{Adjoining $\sqrt[n]{a}$ gives cyclic Galois extensions}
+\begin{lemma}
+    $F(\sqrt[n]{a})/F$ is a cyclic Galois extension for all $a\in F$.\sidenote{$\Gal(F(\sqrt[n]{a})/F)$ is a cyclic group, $\sqrt[n]{a}$ is a root of $x^n-a$}
+\end{lemma}
+\begin{proof}
+    The roots of $x^n-a$ are $\zeta_n^i\sqrt[n]{a}$ for $0\leq i\leq n-1$, so $F(\sqrt[n]{a})$ is the splitting field of $x^n-a$ over $F$. Then $F(\sqrt[n]{a})/F$ is Galois. Consider the map $\Gal(F(\sqrt[n]{a})/F)\to \genset{\zeta_n}$ with the element $\sqrt[n]{a}\mapsto \zeta_n^i$ mapped to $\zeta_n^i$. This map is an injective group homomorphism. \sidenote{check it!}
+    This tells us that $\Gal(F(\sqrt[n]{a})/F)$ is isomorphic to a subgroup of the cyclic group $\genset{\zeta_n}$. Hence, it must be cyclic.
 \end{proof}
 
 
+\begin{lemma}
+    If $K/F$ is a cyclic Galois extension of degree $n$\sidenote{Converse of the previous lemma :)}, then $K=F(\sqrt[n]{a})$ for some $a\in F$.
+\end{lemma}
+\begin{proof}
+    Write $\Gal(K/F)=\genset{\sigma}$ as we said it is cyclic. For $\alpha\in K$, define $\ell (\alpha)=\alpha+\zeta_n\sigma(\alpha)+\dots + \zeta_n^{n-1}\sigma^{n-1}(\alpha)$. Observe that $\sigma(\ell(\alpha))=\zeta_n\sigma(\alpha)+\dots + \zeta_n^{n-1}\sigma^{n-1}(\alpha) + \zeta_n^{n}\sigma^{n}(\alpha)$. But the order of $\sigma$ is $n$, so $\sigma^{n}(\alpha)=\alpha$. Hence, $\sigma(\ell (\alpha))=\zeta_n^{-1}\ell(\alpha)$.
+
+    Now we observe that when $\ell(\alpha)\neq 0$\footnote{Such element always exists due to Linear Independence of Characters (not included in this note).}, we have $\sigma^{i}(\ell(\alpha))=(\zeta_n^{-1})^i\ell(\alpha)$ is $\ell(\alpha)$ \ifnif $n|i$. Hence, $\ell(\alpha)$ is fixed only by the identity automorphism, and so $\ell(\alpha)$ is not in any proper subfield of $K$\sidenote{fundamental theorem!}. That is, $K=F(\ell(\alpha))$. Moreover, $\sigma(\ell(\alpha)^n)=\left(\inv{\zeta_n}\ell(\alpha)\right)^n$ is  $\ell(\alpha)^n$ \ifnif $\ell(\alpha)\in F$. Setting $a=\ell(\alpha)^n$ (hence $\sqrt[n]a=\ell(\alpha)$) completes the proof.
+\end{proof}
+
+\addlink{Solvable by radicals}
+\defn Suppose $F$ is a field, and $\alpha$ is algebraic over $F$. Then $\alpha$ is \textbf{solvable by radicals} if $\alpha\in K\supseteq F$ such that there exists a sequence of intermediate extensions $F=K_0\subseteq K_1\subseteq\dots \subseteq K_r=K$ for which $K_{i+1}=K_i(\sqrt[n]{a_i})$ for some $a_i\in K_i$ for all $0\leq i\leq r-1$. Such a $K$ is called a \textbf{root} (or radical, or solvable) extension of $F$.
+
+\begin{proposition}
+    If $K/F$ is solvable, then there exists a field $L$ containing $K$ for which $L/F$ is a solvable Galois extension.
+\end{proposition}
+
+\addlink{Galois extension is solvable iff. Galois group is solvable}
+\begin{theorem}
+    A Galois extension $K/F$ is solvable \ifnif the Galois group $K/F$ is solvable.
+\end{theorem}
+
+\rmk
+    Observe $p(x)=x^5-4x-2$ has splitting field with Galois group isomorphic to $S_5$, so the quintic is not solvable.
 
  %%%%%%%%%%%%%%%%%%%%%%%%%    
 \end{document} 
