@@ -1264,7 +1264,7 @@ Why do we care? Suppose $F$ is a field containing all $n$-th roots of unity.
 
 \addlink{Adjoining $\sqrt[n]{a}$ gives cyclic Galois extensions}
 \begin{lemma}
-    $F(\sqrt[n]{a})/F$ is a cyclic Galois extension for all $a\in F$.\sidenote{$\Gal(F(\sqrt[n]{a})/F)$ is a cyclic group, $\sqrt[n]{a}$ is a root of $x^n-a$}
+    $F(\sqrt[n]{a})/F$ is a cyclic Galois extension for all $a\in F$.\sidenote{$\Gal(F(\sqrt[n]{a})/F)$ is a cyclic group, $\sqrt[n]{a}$ is any root of $x^n-a$}
 \end{lemma}
 \begin{proof}
     The roots of $x^n-a$ are $\zeta_n^i\sqrt[n]{a}$ for $0\leq i\leq n-1$, so $F(\sqrt[n]{a})$ is the splitting field of $x^n-a$ over $F$. Then $F(\sqrt[n]{a})/F$ is Galois. Consider the map $\Gal(F(\sqrt[n]{a})/F)\to \genset{\zeta_n}$ with the element $\sqrt[n]{a}\mapsto \zeta_n^i$ mapped to $\zeta_n^i$. This map is an injective group homomorphism. \sidenote{check it!}
@@ -1295,6 +1295,57 @@ Why do we care? Suppose $F$ is a field containing all $n$-th roots of unity.
 
 \rmk
     Observe $p(x)=x^5-4x-2$ has splitting field with Galois group isomorphic to $S_5$, so the quintic is not solvable.
+
+Suppose $K/F$ is a Galois, solvable extension.\sidenote{\begin{tikzcd}[ampersand replacement=\&,cramped,sep=scriptsize]
+	K \& 1 \\
+	{K_{i+1}} \& {G_{i+1}} \\
+	{K_i} \& {G_i} \\
+	F \& {G}
+	\arrow[no head, from=1-1, to=2-1]
+	\arrow[no head, from=2-1, to=3-1]
+	\arrow[no head, from=3-1, to=4-1]
+	\arrow[no head, from=1-2, to=2-2]
+	\arrow[no head, from=2-2, to=3-2]
+	\arrow[no head, from=3-2, to=4-2]
+    \arrow[no head, from=1-1, to=1-2]
+    \arrow[no head, from=2-1, to=2-2]
+    \arrow[no head, from=3-1, to=3-2]
+    \arrow[no head, from=4-1, to=4-2]
+\end{tikzcd}} 
+Hence, we could write $F=K_0\subseteq \dots \subseteq K_r=K$ with $K_{i+1}=K_i(\sqrt[n_i]{a_i})$ for some $a_i\in K_i$ for all $1\leq i<r$ and $F$ contains all the requisite roots of unity. Then, for each $i$, we have $K/K_i$ is Galois by FToGT. By the lemmas above, $K_{i+1}/K_i$ is a cyclic Galois extension. By FToGT, $G_{i+1}\nsub G_i$; moreover, $\Gal(K_{i+1}/K_i)\cong \Gal(K/K_i)/\Gal(K/K_{i+1}) = G_i/G_{i+1}$, a cyclic group for all $i$.
+
+Therefore, $G=\Gal(K/F)$ us a solvable group.
+
+\begin{proposition}
+    If $K/F$ is a solvable extension, then there exists $L\supseteq K$ such that $L/F$ is a solvable Galois extension with solvable Galois group.\sidenote{That is, you can add enough things until the extension is Galois!}
+\end{proposition}
+\begin{proof}[Proof outline]
+    Since $K/F$ is solvable, there exists $F=K_0\subseteq \dots \subseteq K_r=K$ with $K_{i+1}=K_i(\sqrt[n_i]{a_i})$ for some $a_i\in K_i$, $n_i\in \N$ for all $1\leq i<r$.
+
+    Main idea: let $L$ be the splitting field of $\displaystyle \left(\prod_{i=0}^{r-1}{m_{\sqrt[n_i]{a_i}, F}(x)}\right)\left(x^{\prod_{i=0}^{r-1} n_i}-1\right)$. 
+    Call $N={\prod_{i=0}^{r-1} n_i}$. Observe that $\zeta_N^{N/n_i}$ has an order $n_i$.
+    % I have stopped comprehending anything
+
+    We would like to have:\sidenote{This diagram is to zoom in from $K_j$ to $K_{j+1}$.}
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped,sep=small]
+        K \& {L_{j,d}} \\
+        {K_{j+1}} \& \vdots \\
+        {K_j} \& {L_{j,1}=L_{j,0}(\alpha_1)} \\
+        F \& {L_{j,0}}
+        \arrow[no head, from=1-1, to=2-1]
+        \arrow[no head, from=3-1, to=4-1]
+        \arrow[no head, from=1-2, to=2-2]
+        \arrow[no head, from=2-2, to=3-2]
+        \arrow[no head, from=3-2, to=4-2]
+        \arrow[no head, from=2-1, to=3-1]
+        \arrow[dashed, no head, from=2-1, to=1-2]
+        \arrow[dashed, no head, from=3-1, to=4-2]
+    \end{tikzcd}\]
+    where $K_j=F(\sqrt[n_j]{a_0},\dots, \sqrt[n_j]{a_{j-1}})$ and $L_{j,0}=(F(\zeta_N))(\sqrt[n_j]{a_0}\text{ \& all Gal conj.},\dots, \sqrt[n_j]{a_{j-1}}\text{ \& all Gal conj.})$ such that we eventually get a Galois extension after adjoining all $L$s onto $F$.
+
+    Still to show that $L_{j,k+1}=L_{j,k}(\alpha_{k+1})$.
+\end{proof}
+
 
  %%%%%%%%%%%%%%%%%%%%%%%%%    
 \end{document} 
